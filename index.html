@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>My Book</h1>
-    <button id="new-book-btn">Add New Book</button>
+    <button type="submit" id="new-book-btn">Add New Book</button>
     <dialog id="book-dialog">
         <h2>Add New Book</h2>
         <form id="book-form" method="dialog">
@@ -17,8 +17,7 @@
             <label for="author">Author</label>
             <input type="text" name="author" required>
             <label for="pages">Pages</label>
-            <input type="number" name="pages" required>
-            <label for="isRead">Read</label>
+            <input type="number" name="pages" min="1" required />            <label for="isRead">Read</label>
             <input type="checkbox" name="isRead">
             <button type="submit">Add Book</button>
             <button type="button" id="cancel-btn">Cancel</button>   

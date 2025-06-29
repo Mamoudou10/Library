@@ -64,3 +64,17 @@ const cancelBtn = document.getElementById("cancel-btn");
 
 newBookBtn.addEventListener("click", () => dialog.showModal());
 cancelBtn.addEventListener("click", () => dialog.close());
+
+form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(form);
+    const title = formData.get("title");
+    const author = formData.get("author");
+    const pages = formData.get("pages");
+    const isRead = formData.get("isRead") === "on"
+
+    addBookToLibrary(title, author, pages, isRead);
+    displayBooks();
+    form.reset();        // (optionnel) pour réinitialiser le formulaire
+    dialog.close()
+} )
