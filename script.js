@@ -40,6 +40,7 @@ function displayBooks() {
     <p>Pages: ${book.pages}</p>
     <p>Read: ${book.isRead ? "Yes" : "No"}</p>
     <button class="remove-button" data-id="${book.id}">Remove</button>
+    <button class="toggle-read-button" data-id="${book.id}">Toggle Read</button>
     ` 
     container.appendChild(bookElement)
     })
@@ -48,6 +49,18 @@ removeButtons.forEach((button) => {
     button.addEventListener("click", () => {
         const id = button.dataset.id;
         removeBookById(id);
+    })
+})
+
+const toggleReadButtons = document.querySelectorAll(".toggle-read-button");
+toggleReadButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const id = button.dataset.id;
+        const book = myLibrary.find(book => book.id === id);
+        if(book) {
+            book.toggleReadStatus();
+            displayBooks();
+        }
     })
 })
 
@@ -94,4 +107,8 @@ function removeBookById (id) {
         myLibrary.splice(index, 1);
         displayBooks()
     }
+}
+
+Book.prototype.toggleReadStatus = function () {
+    this.isRead = !this.isRead;
 }
