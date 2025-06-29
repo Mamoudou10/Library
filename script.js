@@ -32,16 +32,25 @@ function displayBooks() {
     myLibrary.forEach((book) => {
         const bookElement = document.createElement("div")
         bookElement.classList.add("book-card")
+        bookElement.dataset.id = book.id
 
     bookElement.innerHTML = `
     <h3>${book.title}</h3>
     <p>Author: ${book.author}</p>
     <p>Pages: ${book.pages}</p>
     <p>Read: ${book.isRead ? "Yes" : "No"}</p>
-    <button class="remove-button">Remove</button>
+    <button class="remove-button" data-id="${book.id}">Remove</button>
     ` 
     container.appendChild(bookElement)
     })
+    const removeButtons = document.querySelectorAll(".remove-button");
+removeButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const id = button.dataset.id;
+        removeBookById(id);
+    })
+})
+
 }
 
 addBookToLibrary("The Great Gatsby", "F. Scott Fitzgerald", 180, true);
@@ -78,3 +87,11 @@ form.addEventListener("submit", (e) => {
     form.reset();        // (optionnel) pour réinitialiser le formulaire
     dialog.close()
 } )
+
+function removeBookById (id) {
+    const index = myLibrary.findIndex(book => book.id === id);
+    if(index !== -1) {
+        myLibrary.splice(index, 1);
+        displayBooks()
+    }
+}
