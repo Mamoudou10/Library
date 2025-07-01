@@ -1,11 +1,17 @@
 const myLibrary = [];
 
-function Book(title, author, pages, isRead) {
-    this.id = crypto.randomUUID();
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.isRead = isRead;
+class Book {
+    constructor(title, author, pages, isRead) {
+        this.id = crypto.randomUUID();
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.isRead = isRead;
+    }
+
+    toggleReadStatus() {
+        this.isRead = !this.isRead;
+    }
 }
 
 function addBookToLibrary(title, author, pages, isRead) {
@@ -107,8 +113,4 @@ function removeBookById (id) {
         myLibrary.splice(index, 1);
         displayBooks()
     }
-}
-
-Book.prototype.toggleReadStatus = function () {
-    this.isRead = !this.isRead;
 }
